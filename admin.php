@@ -15,7 +15,7 @@ if(isset($_POST["api"])){
       $sql = "SELECT * FROM ordenadores WHERE BINARY api = '$api' and admin = 1";
       if($do = mysqli_query($link, $sql)){
             if($do->num_rows > 0){
-
+                  echo "Puto el que lo lea";
             }else{
                   echo "<video src='https://ir.stonybrook.edu/xmlui/bitstream/handle/11401/9656/rickroll.mp4?sequence=1' autoplay controls>";
             }
