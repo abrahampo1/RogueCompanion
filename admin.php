@@ -17,7 +17,7 @@ if(isset($_POST["api"])){
             if($do->num_rows > 0){
 
             }else{
-                  echo "<video src='https://ir.stonybrook.edu/xmlui/bitstream/handle/11401/9656/rickroll.mp4?sequence=1' autoplay>";
+                  echo "<video src='https://ir.stonybrook.edu/xmlui/bitstream/handle/11401/9656/rickroll.mp4?sequence=1' autoplay controls>";
             }
       }
 }
