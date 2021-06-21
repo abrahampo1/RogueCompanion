@@ -65,6 +65,7 @@ if(isset($_POST["api"])){
 <style>
       .ordenadores{
             display: flex;
+            flex-wrap: wrap;
       }
 
       .ordenador{
