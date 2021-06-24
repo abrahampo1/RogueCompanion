@@ -1,0 +1,1 @@
+"RBX Alt Manager.exe {acc id in the row} {add/remove/join/userjoin} {usernametojoin}]"
