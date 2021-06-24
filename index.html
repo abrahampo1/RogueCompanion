@@ -24,8 +24,6 @@
   <title>RogueCompanion by CP</title>
   <script src="js/p5.min.js"></script>
   <script src="js/three.r95.min.js"></script>
-  <script src="js/vanta.waves.min.js"></script>
-  <script src="js/vanta.dots.min.js"></script>
   <link rel="manifest" href="/manifest.json" />
   <meta name="msapplication-TileColor" content="#ffffff" />
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
@@ -43,19 +41,23 @@
   href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap"
   rel="stylesheet"
 />
+<script src="js/vanta.net.min.js"></script>
 <script>
-  VANTA.DOTS({
-    el: "#element",
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.0,
-    minWidth: 200.0,
-    scale: 1.0,
-    scaleMobile: 1.0,
-    color: 0x984a08,
-    color2: 0x783e0e,
-  });
+VANTA.NET({
+  el: "#element",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: true,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  scale: 1.00,
+  scaleMobile: 1.00,
+  color: 0xff002c,
+  backgroundColor: 0x0,
+  points: 3.00,
+  maxDistance: 23.00,
+  spacing: 10.00
+})
 </script>
 <div
   style="
@@ -70,7 +72,7 @@
 >
   <h1>RogueCompanion</h1>
   <h2>RogueLineague Tools by CP</h2>
-  <iframe style="border-radius: 20px" width="560" height="315" src="https://www.youtube.com/embed/gRVfwyZdr9Q?version=3&loop=1&autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe style="border-radius: 20px" width="560" height="315" src="https://www.youtube.com/embed/53k1z0tTsfI?version=3&loop=1&autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   <hr />
   <br /><a
     href="https://github.com/abrahampo1/RogueCompanion/releases/download/1.5/RogueCompanion_win64.zip"
