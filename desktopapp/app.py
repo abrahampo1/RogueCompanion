@@ -21,6 +21,7 @@ import logging
 #from pynput.mouse import Listener
 #import keyboard
 
+
 global currentskill
 currentskill = ""
 logging.basicConfig(filename='std.log', filemode='w',
@@ -233,7 +234,6 @@ def conectar():
             break
 
 
-eel.init('rogue')
 
 
 def useskill(skill):
@@ -379,5 +379,5 @@ def close_callback(route, websockets):  # Kill the instances when program close
             subprocess.run(
                 "C:\Windows\System32/taskkill /F /IM RogueCompanion.exe", shell=True)
 
-
+eel.init('web')
 eel.start('index.html', port=8575, close_callback=close_callback)
