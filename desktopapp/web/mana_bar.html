@@ -7,21 +7,21 @@
 <script src="js/three.r95.min.js"></script>
 <script src="js/vanta.net.min.js"></script>
 <script>
-VANTA.NET({
-  el: "#element",
-  mouseControls: true,
-  touchControls: true,
-  gyroControls: true,
-  minHeight: 200.00,
-  minWidth: 200.00,
-  scale: 1.00,
-  scaleMobile: 1.00,
-  color: 0xff002c,
-  backgroundColor: 0x0,
-  points: 3.00,
-  maxDistance: 23.00,
-  spacing: 10.00
-})
+  VANTA.NET({
+    el: "#element",
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: true,
+    minHeight: 200.0,
+    minWidth: 200.0,
+    scale: 1.0,
+    scaleMobile: 1.0,
+    color: 0xff002c,
+    backgroundColor: 0x0,
+    points: 3.0,
+    maxDistance: 23.0,
+    spacing: 10.0,
+  });
 </script>
 <head>
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
@@ -62,29 +62,35 @@ VANTA.NET({
     <h1 class="scale-in-center" style="position: relative; top: 15px">
       ManaOverlay
     </h1>
-
+    <div class="bars" id="custombars" style="padding-bottom: 10px">
+      Loading...
+    </div>
     <div class="bars" id="bars">Loading...</div>
     <div id="json"></div>
     <div class="topnav" style="z-index: 20">
       <div class="buttons" style="z-index: 20">
         <button
           class="pulse btn-center"
-          style="z-index: 20; background-color: rgba(0,0,0,0.5)"
+          style="z-index: 20; background-color: rgba(0, 0, 0, 0.5)"
           onclick="window.location.replace('index.html')"
         >
           Home
         </button>
       </div>
     </div>
-    <div class="sonido" >
-      <img onclick="opensettings()" src="icons/sliders-h-solid.svg" alt="" />
+    <div class="sonido">
+      <img
+        onclick="opensettings(`modal`)"
+        src="icons/sliders-h-solid.svg"
+        alt=""
+      />
     </div>
   </body>
-  
-  <div class="modal" id="modal" >
-    <div class="modal-background" onclick="closemodal()"></div>
+
+  <div class="modal" id="modal">
+    <div class="modal-background" onclick="closemodal(`modal`)"></div>
     <div class="modal-content" id="modal-content">
-      <span onclick="closemodal()">X</span>
+      <span onclick="closemodal(`modal`)">X</span>
       <div class="controls">
         <h4>Opacity</h4>
         <input
@@ -93,22 +99,47 @@ VANTA.NET({
           min="0"
           id="opac"
           onchange="changeopacity()"
-        /><br /><h4>Height (px)</h4><input
+        /><br />
+        <h4>Height (px)</h4>
+        <input
           type="number"
           placeholder="height"
           id="height_input"
           onchange="changevar(this)"
-        /><br /><h4>X Position (px)</h4><input
+        /><br />
+        <h4>X Position (px)</h4>
+        <input
           type="number"
           placeholder="X"
           id="x_input"
           onchange="changevar(this)"
-        /><br /><h4>Y Position (px)</h4><input
+        /><br />
+        <h4>Y Position (px)</h4>
+        <input
           type="number"
           placeholder="Y"
           id="y_input"
           onchange="changevar(this)"
-        /><br><button onclick="setmana(localStorage.getItem('selected'))">Apply</button>
+        /><br /><button onclick="setmana(localStorage.getItem('selected'))">
+          Apply
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="modal-add">
+    <div class="modal-background" onclick="closemodal(`modal-add`)"></div>
+    <div class="modal-content" id="modal-content">
+      <span onclick="closemodal(`modal-add`)">X</span>
+      <div class="controls">
+        <h4>Image Source</h4>
+        <input
+          type="text"
+          id="manabarsrc"
+          placeholder="https://i.imgur.com/FKmX7dt.gif"
+          onchange="document.getElementById(`previewimg`).src = this.value"
+        /><br />
+        <button onclick="addmanabar()">Add</button>
+        <img src="" alt="" id="previewimg" />
       </div>
     </div>
   </div>
@@ -116,15 +147,15 @@ VANTA.NET({
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
-  function opensettings() {
-    document.getElementById("modal").classList.add("fade-in");
-    document.getElementById("modal").style.display = "block";
+  function opensettings(modal) {
+    document.getElementById(modal).classList.add("fade-in");
+    document.getElementById(modal).style.display = "block";
   }
-  function closemodal() {
-    document.getElementById("modal").style.display = "none";
+  function closemodal(modal) {
+    document.getElementById(modal).style.display = "none";
   }
   window.onload = function () {
-    eel.load()
+    eel.load();
     if (localStorage.getItem("opacity")) {
       var op = localStorage.getItem("opacity");
     } else {
@@ -152,6 +183,17 @@ VANTA.NET({
     document.getElementById("height_input").value = h;
     document.getElementById("x_input").value = x;
     document.getElementById("y_input").value = y;
+    if (localStorage.getItem("custombars")) {
+      var customs = JSON.parse(localStorage.getItem("custombars"));
+      var i = 0;
+      customs.forEach((element) => {
+        console.log(element["name"]);
+        generatebar(element["name"], element["src"], "custom", "custombars", i);
+        i++;
+      });
+    } else {
+      document.getElementById("custombars").style.display = "none";
+    }
     $.ajax({
       type: "post",
       url: "https://rogue.cpsoftware.es/api.php",
@@ -160,7 +202,7 @@ VANTA.NET({
       },
       success: function (response) {
         document.getElementById("bars").innerHTML =
-          "<div class='bar' onclick='eel.closemana()'><img src='https://i.imgur.com/dfVKrAd.png'><p>NONE</p></div>";
+          "<div class='bar' onclick='eel.closemana()'><img src='https://i.imgur.com/dfVKrAd.png'><p>NONE</p></div><div class='bar' onclick='opensettings(`modal-add`)'><img src='https://i.imgur.com/w0HeFrk.png'><p>Add custom</p></div>";
         array = response.split(";;");
         array.forEach((element) => {
           array_resp = element.split(";");
@@ -168,7 +210,7 @@ VANTA.NET({
             nombre = array_resp[0];
             src = array_resp[1];
             id = array_resp[2];
-            generatebar(nombre, src, id);
+            generatebar(nombre, src, id, "bars");
           }
         });
       },
@@ -176,18 +218,30 @@ VANTA.NET({
     });
   };
 
-  function generatebar(nombre, src, id) {
-    var bars = document.getElementById("bars");
+  function generatebar(nombre, src, id, div, counter = 0) {
+    var bars = document.getElementById(div);
     console.log("Generated: " + id);
-    bars.innerHTML +=
-      "<div class='bar' onclick='setmana(`" +
-      src +
-      "`)'><img src='" +
-      src +
-      "'><p>" +
-      nombre +
-      "</p></div>";
+    if (id != "custom") {
+      bars.innerHTML +=
+        "<div class='bar' onclick='setmana(`" +
+        src +
+        "`)'><img src='" +
+        src +
+        "'><p>" +
+        nombre +
+        "</p></div>";
+    } else {
+      bars.innerHTML +=
+        "<div class='bar' onclick='setmana(`" +
+        src +
+        "`)'><img src='" +
+        src +
+        "'><p>" +
+        nombre +
+        "</p><a onclick='removecounter("+counter+")'>Remove</a></div>";
+    }
   }
+
   function setmana(src) {
     localStorage.setItem("selected", src);
     if (localStorage.getItem("opacity")) {
@@ -242,6 +296,32 @@ VANTA.NET({
     var value = variable.value;
     localStorage.setItem(src + variable.id, String(value));
     console.log("Asignado " + variable.id + " a " + variable.value);
+  }
+  function addmanabar() {
+    var match = false;
+    if (localStorage.getItem("custombars")) {
+      var actualcounters = JSON.parse(localStorage.getItem("custombars"));
+      var i = 0;
+    } else {
+      var actualcounters = [];
+    }
+
+    if (match == false) {
+      actualcounters.push({
+        name: "",
+        src: document.getElementById("manabarsrc").value,
+      });
+      var jsonstring = JSON.stringify(actualcounters);
+      localStorage.setItem("custombars", JSON.stringify(actualcounters));
+      document.getElementById("modal-add").style.display = "none";
+      location.reload();
+    }
+  }
+  function removecounter(counter){
+    var elements = JSON.parse(localStorage.getItem("custombars"));
+    var newarray = elements.filter(person => person.src != elements[counter]["src"]);
+    localStorage.setItem("custombars", JSON.stringify(newarray));
+    location.reload()
   }
 </script>
 <script src="js/cooldown.js"></script>

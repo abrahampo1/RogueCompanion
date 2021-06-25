@@ -453,6 +453,12 @@ img {
   padding: 5px;
   border-radius: 5px;
 }
+.bar a{
+  cursor: pointer;
+  background-color: var(--primary);
+  padding: 5px;
+  border-radius: 5px;
+}
 .counter .info{
   display: flex;
   align-items: center;

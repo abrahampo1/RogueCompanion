@@ -6,4 +6,5 @@
 std.log
 /desktopapp/build/*
 /desktopapp/build
+desktopapp/manaoverlay.exe
 /desktopapp/__pycache__
