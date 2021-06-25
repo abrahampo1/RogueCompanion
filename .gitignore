@@ -6,3 +6,4 @@
 std.log
 /desktopapp/build/*
 /desktopapp/build
+/desktopapp/__pycache__
