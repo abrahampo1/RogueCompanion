@@ -1,2 +1,8 @@
 /api.php
 /desktopapp/dist/*
+/desktopapp/app.spec
+/desktopapp/data.txt
+/desktopapp/std.log
+std.log
+/desktopapp/build/*
+/desktopapp/build

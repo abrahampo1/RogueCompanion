@@ -319,17 +319,6 @@ def ver():
 def refreshaltdata():
     load()
 
-
-@eel.expose
-def get_timer():
-    num_timers = 9
-    timers = ""
-    for i in range(num_timers):
-        timers += ";;" + str(i) + ";10"
-        i+1
-    eel.settimers(timers)
-
-
 @eel.expose
 def load():
     global windowopen
@@ -369,7 +358,13 @@ def close_callback(route, websockets):  # Kill the instances when program close
     if not websockets:
         global windowopen
         windowopen = 0
-        eel.sleep(5)
+        i = 0
+        print("closed")
+        while i != 5:
+            eel.sleep(1)
+            i = i+1
+            if windowopen == 1:
+                break
         if windowopen == 0:
             print("OK CLOSING")
             subprocess.run(
