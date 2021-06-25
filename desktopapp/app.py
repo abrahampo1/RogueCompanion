@@ -28,7 +28,7 @@ logging.basicConfig(filename='std.log', filemode='w',
                     format='%(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-version = 1.52
+version = 1.53
 global windowopen #Set a variable to know when close the program on lose webhook
 url_web = "https://rogue.cpsoftware.es"
 
