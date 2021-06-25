@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<div
+  id="element"
+  style="position: fixed; width: 100%; height: 100%; left: 0; top: 0"
+></div>
+<script src="js/p5.min.js"></script>
+<script src="js/three.r95.min.js"></script>
+<script src="js/vanta.net.min.js"></script>
+<script>
+VANTA.NET({
+  el: "#element",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: true,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  scale: 1.00,
+  scaleMobile: 1.00,
+  color: 0xff002c,
+  backgroundColor: 0x0,
+  points: 3.00,
+  maxDistance: 23.00,
+  spacing: 10.00
+})
+</script>
+<head>
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="/android-icon-192x192.png"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RogueCompanion</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/main.css" />
+  <script type="text/javascript" src="/eel.js"></script>
+</head>
+<html lang="es" onload="loadpage()">
+  <body id="body" onload="eel.load()" style="overflow-y: scroll">
+    <div class="texto" style="width: 100%">
+      <h1 class="scale-in-center">SkillCooldown</h1>
+      <div class="controlesskills">
+        <input
+          class="control-number"
+          type="number"
+          id="slots"
+          max="12"
+          min="1"
+          value="3"
+          style="color: black"
+          onchange="setslots(this)"
+        />
+        Opacity
+        <input
+          type="range"
+          max="100"
+          min="0"
+          id="opac"
+          class="opacity"
+          onchange="changeopacity(this)"
+        />
+        <div class="config_btn" onclick="openmodal()">Configure Skill Overlay</div>
+        
+        <input
+          type="color"
+          id="color"
+          class="control-number color"
+          onchange="savecolor(this)"
+        />
+      </div>
+
+      <div
+        class="exp"
+        style="
+        opacity: 0.8;
+        overflow-y: auto;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 200px;
+          height: 500px;
+        "
+      >
+        <div class="skill">
+          <span>1</span>
+          <p id="cd-1"></p>
+          <select name="" id="select-1" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>2</span>
+          <p id="cd-2"></p>
+          <select name="" id="select-2" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>3</span>
+          <p id="cd-3"></p>
+          <select name="" id="select-3" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>4</span>
+          <p id="cd-4"></p>
+          <select name="" id="select-4" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>5</span>
+          <p id="cd-5"></p>
+          <select name="" id="select-5" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>6</span>
+          <p id="cd-6"></p>
+          <select name="" id="select-6" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>7</span>
+          <p id="cd-7"></p>
+          <select name="" id="select-7" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>8</span>
+          <p id="cd-8"></p>
+          <select name="" id="select-8" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>9</span>
+          <p id="cd-9"></p>
+          <select name="" id="select-9" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>10</span>
+          <p id="cd-10"></p>
+          <select name="" id="select-10" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>11</span>
+          <p id="cd-11"></p>
+          <select name="" id="select-11" onchange="selectskill(this)"></select>
+        </div>
+        <div class="skill">
+          <span>12</span>
+          <p id="cd-12"></p>
+          <select name="" id="select-12" onchange="selectskill(this)"></select>
+        </div>
+      </div>
+    </div>
+    <div class="version" id="version"></div>
+    <div id="json"></div>
+    <div class="topnav">
+      <div class="buttons">
+        <button
+          class="pulse btn-center"
+          style="z-index: 20; background-color: rgba(0, 0, 0, 0.6)"
+          onclick="window.location.replace('index.html')"
+        >
+          Home
+        </button>
+        <button class="pulse btn-center" style="display: none" id="button-mine">
+          Ore Timer
+        </button>
+        <button class="pulse btn-center" style="display: none" id="button-mana">
+          Mana Overlay
+        </button>
+        <button class="pulse btn-center" style="display: none" id="button-cd">
+          Skill Cooldowns
+        </button>
+        <button
+          class="pulse btn-center"
+          style="display: none"
+          id="button-counter"
+        >
+          Counters
+        </button>
+      </div>
+    </div>
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <span onclick="closemodal()">X</span>
+        <div class="controls">
+          <h4>X Position (px)</h4><input
+            type="number"
+            placeholder="X"
+            id="xskill"
+            onchange="setx(this)"
+          /><br /><h4>Y Position (px)</h4><input
+            type="number"
+            placeholder="Y"
+            id="yskill"
+            onchange="sety(this)"
+          /><br><button onclick="config()">Test Overlay</button>
+          <button onclick="closeskill()">Close Overlay</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+  function openmodal(){
+    document.getElementById("modal").style.display = "inherit";
+  }
+  function closemodal(){
+    document.getElementById("modal").style.display = "none";
+  }
+  function config(){
+    localStorage.setItem("skillslots", "12");
+    setmanaskills(1, 0, "true", "true");
+    for(var i = 1; i != 13; i++){
+      setmanaskills(1, i, "true");
+    }
+    
+  }
+  function closeskill(){
+    localStorage.setItem("skillslots", document.getElementById("slots").value);
+    setmanaskills(1, 1, "false", "true");
+    
+  }
+  window.onload = function () {
+    if (localStorage.getItem("skillx")) {
+      var firstx = localStorage.getItem("skillx");
+    } else {
+      var firstx = 928;
+    }
+    if (localStorage.getItem("skilly")) {
+      var firsty = localStorage.getItem("skilly");
+    } else {
+      var firsty = 928;
+    }
+    if (localStorage.getItem("skillsep")) {
+      var sep = localStorage.getItem("skillsep");
+    } else {
+      var sep = 36;
+    }
+    if (localStorage.getItem("skillslots")) {
+      var value = localStorage.getItem("skillslots");
+    } else {
+      var value = 3;
+    }
+    if (localStorage.getItem("skillcolor")) {
+      var color = localStorage.getItem("skillcolor");
+    } else {
+      var color = "#fff";
+    }
+    if (localStorage.getItem("skillopacity")) {
+      var op = localStorage.getItem("skillopacity");
+    } else {
+      var op = 50;
+    }
+    document.getElementById("color").value = color;
+    document.getElementById("opac").value = op;
+    document.getElementById("slots").value = value;
+    document.getElementById("xskill").value = firstx;
+    document.getElementById("yskill").value = firsty;
+
+    for (var i = 1; i != 13; i++) {
+      if (i - 1 < value) {
+        document.getElementById("cd-" + i).parentElement.style.display = "block";
+      } else {
+        document.getElementById("cd-" + i).parentElement.style.display = "none";
+      }
+    }
+    console.log("loading");
+    $.ajax({
+      type: "post",
+      url: "https://rogue.cpsoftware.es/api.php",
+      data: {
+        getskills: "",
+      },
+      success: function (response) {
+        array = response.split(";;");
+        array.forEach((element) => {
+          array_resp = element.split(";");
+          if (array_resp[1] != null) {
+            nombre = array_resp[0];
+            cooldown = array_resp[1];
+            id = array_resp[2];
+            generateskills(nombre, cooldown, id);
+          }
+        });
+      },
+    });
+  };
+  function generateskills(name, cooldown, id) {
+    for (var i = 1; i != 13; i++) {
+      if (localStorage.getItem("select-" + i) == name) {
+        document.getElementById("select-" + i).innerHTML +=
+          "<option selected value='" + cooldown + "'>" + name + "</option>";
+      } else {
+        document.getElementById("select-" + i).innerHTML +=
+          "<option value='" + cooldown + "'>" + name + "</option>";
+      }
+    }
+  }
+  function setslots(info) {
+    localStorage.setItem("skillslots", info.value);
+    var value = info.value;
+    for (var i = 1; i != 13; i++) {
+      if (i - 1 < value) {
+        document.getElementById("cd-" + i).parentElement.style.display = "block";
+      } else {
+        document.getElementById("cd-" + i).parentElement.style.display = "none";
+      }
+    }
+  }
+  function selectskill(skill) {
+    localStorage.setItem(skill.id, skill.options[skill.selectedIndex].text);
+    
+  }
+
+  function savecolor(color) {
+    localStorage.setItem("skillcolor", color.value);
+  }
+  function changeopacity(op) {
+    localStorage.setItem("skillopacity", op.value);
+  }
+  function setx(set){
+    localStorage.setItem("skillx", set.value)
+  }
+  function sety(set){
+    localStorage.setItem("skilly", set.value)
+  }
+  function setsep(set){
+    localStorage.setItem("skillsep", set.value)
+  }
+</script>
+
+<script src="js/main.js"></script>
+
+<script src="js/cooldown.js"></script>

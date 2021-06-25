@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<head>
+  <div id="element" 
+style="  
+	position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;"> 
+</div>
+<script src="js/p5.min.js"></script>
+<script src="js/three.r95.min.js"></script>
+<script src="js/vanta.net.min.js"></script>
+<script>
+VANTA.NET({
+  el: "#element",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: true,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  scale: 1.00,
+  scaleMobile: 1.00,
+  color: 0xff002c,
+  backgroundColor: 0x0,
+  points: 3.00,
+  maxDistance: 23.00,
+  spacing: 10.00
+})
+</script>
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="/android-icon-192x192.png"
+  />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RogueCompanion</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/main.css" />
+  <script type="text/javascript" src="/eel.js"></script>
+</head>
+<html lang="es">
+  <body id="body" onload="eel.load()">
+    <div class="texto">
+        <h1 id="time">10:00</h1>
+      <div class="exp">
+        <p style="color: whitesmoke;">
+        Press the button when you see the ores spawning to set the timer.
+        </p>
+      </div>
+      <button id="sync" onclick="sinc()">Start</button>
+      
+    </div>
+    <div class="topnav">
+      <button class="pulse btn-center" onclick="window.location.replace('index.html')">Home</button>
+    </div>
+  </body>
+</html>
+<div class="sonido"><img src="icons/volume-up-solid.svg" alt=""></div>
+<div class="modal"><select name="sonido" id="sonido">
+  <option value="https://www.myinstants.com/media/sounds/zeldaitem.swf.mp3" selected>Ninguno</option>
+  <option value="https://www.myinstants.com/media/sounds/zeldaitem.swf.mp3">
+    Sonido Zelda
+  </option></div>
+<script>
+    var sonidos = document.getElementById("sonido");
+    var aviso = sonidos.options[sonidos.selectedIndex].value;
+    function testsound() {
+      var sonidos = document.getElementById("sonido");
+      aviso = sonidos.options[sonidos.selectedIndex].value;
+      var sound = new Audio(aviso);
+      sound.play();
+    };
+    function testsoundcustom() {
+      aviso = document.getElementById("audio_src").value;
+      var sound = new Audio(aviso);
+      sound.play();
+    }
+    var empezar = false;
+    var minutoaponer;
+    function sinc() {
+      var myobj = document.getElementById("sync");
+      myobj.remove();
+      (function () {
+        var start = new Date();
+        var minuto = new Date();
+        var minutoexacto = minuto.getMinutes();
+        var horaactual = minuto.getHours();
+        var segundos = minuto.getSeconds();
+        if (minutoexacto >= 50) {
+          minutoaponer = minutoexacto % 10;
+          minutoaponer = pad(minutoaponer);
+          horaactual++;
+        } else {
+          minutoaponer = minutoexacto + 10;
+        }
+        if (segundos < 10) {
+          segundos = pad(segundos);
+        }
+        start.setHours(horaactual, minutoaponer, segundos);
+        function pad(num) {
+          return ("0" + parseInt(num)).substr(-2);
+        }
+        function tick() {
+          var now = new Date();
+          var remain = (start - now) / 1000;
+          var hh = pad((remain / 60 / 60) % 60);
+          var mm = pad((remain / 60) % 60);
+          var ss = pad(remain % 60);
+          document.getElementById("time").innerHTML = mm + ":" + ss;
+  
+          if (mm == "00" && ss == "00") {
+            var sound = new Audio(aviso);
+            sound.play();
+            var minuto = new Date();
+            var segundos = minuto.getSeconds();
+            if (segundos < 10) {
+              segundos = pad(segundos);
+            }
+            var minutoexacto = minuto.getMinutes();
+            var horaactual = minuto.getHours();
+            if (minutoexacto >= 50) {
+              minutoaponer = minutoexacto % 10;
+              minutoaponer = pad(minutoaponer);
+              horaactual++;
+            } else {
+              minutoaponer = minutoexacto + 10;
+            }
+            start.setHours(horaactual, minutoaponer, segundos);
+            
+          }
+          setTimeout(tick, 1000);
+        }
+  
+        document.addEventListener("DOMContentLoaded", tick);
+        tick();
+      })();
+    }
+  </script>
+  <script src="js/cooldown.js"></script>

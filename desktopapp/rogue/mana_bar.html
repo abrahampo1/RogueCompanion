@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<div
+  id="element"
+  style="position: fixed; width: 100%; height: 100%; left: 0; top: 0"
+></div>
+<script src="js/p5.min.js"></script>
+<script src="js/three.r95.min.js"></script>
+<script src="js/vanta.net.min.js"></script>
+<script>
+VANTA.NET({
+  el: "#element",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: true,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  scale: 1.00,
+  scaleMobile: 1.00,
+  color: 0xff002c,
+  backgroundColor: 0x0,
+  points: 3.00,
+  maxDistance: 23.00,
+  spacing: 10.00
+})
+</script>
+<head>
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="/android-icon-192x192.png"
+  />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RogueCompanion</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/main.css" />
+  <script type="text/javascript" src="/eel.js"></script>
+</head>
+<html lang="es">
+  <body id="body" onload="eel.load()" style="line-height: -10px">
+    <h1 class="scale-in-center" style="position: relative; top: 15px">
+      ManaOverlay
+    </h1>
+
+    <div class="bars" id="bars">Loading...</div>
+    <div id="json"></div>
+    <div class="topnav" style="z-index: 20">
+      <div class="buttons" style="z-index: 20">
+        <button
+          class="pulse btn-center"
+          style="z-index: 20; background-color: rgba(0,0,0,0.5)"
+          onclick="window.location.replace('index.html')"
+        >
+          Home
+        </button>
+      </div>
+    </div>
+    <div class="sonido" >
+      <img onclick="opensettings()" src="icons/sliders-h-solid.svg" alt="" />
+    </div>
+  </body>
+  
+  <div class="modal" id="modal" >
+    <div class="modal-background" onclick="closemodal()"></div>
+    <div class="modal-content" id="modal-content">
+      <span onclick="closemodal()">X</span>
+      <div class="controls">
+        <h4>Opacity</h4>
+        <input
+          type="range"
+          max="100"
+          min="0"
+          id="opac"
+          onchange="changeopacity()"
+        /><br /><h4>Height (px)</h4><input
+          type="number"
+          placeholder="height"
+          id="height_input"
+          onchange="changevar(this)"
+        /><br /><h4>X Position (px)</h4><input
+          type="number"
+          placeholder="X"
+          id="x_input"
+          onchange="changevar(this)"
+        /><br /><h4>Y Position (px)</h4><input
+          type="number"
+          placeholder="Y"
+          id="y_input"
+          onchange="changevar(this)"
+        /><br><button onclick="setmana(localStorage.getItem('selected'))">Apply</button>
+      </div>
+    </div>
+  </div>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+  function opensettings() {
+    document.getElementById("modal").classList.add("fade-in");
+    document.getElementById("modal").style.display = "block";
+  }
+  function closemodal() {
+    document.getElementById("modal").style.display = "none";
+  }
+  window.onload = function () {
+    eel.load()
+    if (localStorage.getItem("opacity")) {
+      var op = localStorage.getItem("opacity");
+    } else {
+      var op = "50";
+    }
+    if (localStorage.getItem("height_input")) {
+      var h = localStorage.getItem("height_input");
+    } else {
+      var h = "400";
+    }
+    if (localStorage.getItem("x_input")) {
+      var x = localStorage.getItem("x_input");
+    } else {
+      var x = "-236";
+    }
+    if (localStorage.getItem("y_input")) {
+      var y = localStorage.getItem("y_input");
+    } else {
+      var y = "500";
+    }
+    if (localStorage.getItem("selected")) {
+      localStorage.setItem("selected", "");
+    }
+    document.getElementById("opac").value = op;
+    document.getElementById("height_input").value = h;
+    document.getElementById("x_input").value = x;
+    document.getElementById("y_input").value = y;
+    $.ajax({
+      type: "post",
+      url: "https://rogue.cpsoftware.es/api.php",
+      data: {
+        getmanabars: "",
+      },
+      success: function (response) {
+        document.getElementById("bars").innerHTML =
+          "<div class='bar' onclick='eel.closemana()'><img src='https://i.imgur.com/dfVKrAd.png'><p>NONE</p></div>";
+        array = response.split(";;");
+        array.forEach((element) => {
+          array_resp = element.split(";");
+          if (array_resp[1] != null) {
+            nombre = array_resp[0];
+            src = array_resp[1];
+            id = array_resp[2];
+            generatebar(nombre, src, id);
+          }
+        });
+      },
+      error: function () {},
+    });
+  };
+
+  function generatebar(nombre, src, id) {
+    var bars = document.getElementById("bars");
+    console.log("Generated: " + id);
+    bars.innerHTML +=
+      "<div class='bar' onclick='setmana(`" +
+      src +
+      "`)'><img src='" +
+      src +
+      "'><p>" +
+      nombre +
+      "</p></div>";
+  }
+  function setmana(src) {
+    localStorage.setItem("selected", src);
+    if (localStorage.getItem("opacity")) {
+      var op = localStorage.getItem("opacity");
+    } else {
+      var op = "50";
+    }
+    var w = "200";
+    if (localStorage.getItem(src + "height_input")) {
+      var h = localStorage.getItem(src + "height_input");
+    } else {
+      var h = "400";
+    }
+    if (localStorage.getItem(src + "x_input")) {
+      var x = localStorage.getItem(src + "x_input");
+    } else {
+      var x = "-236";
+    }
+    if (localStorage.getItem(src + "y_input")) {
+      var y = localStorage.getItem(src + "y_input");
+    } else {
+      var y = "500";
+    }
+    document.getElementById("height_input").value = h;
+    document.getElementById("x_input").value = x;
+    document.getElementById("y_input").value = y;
+    console.log(
+      "Generando manabar: " +
+        src +
+        " " +
+        w +
+        " " +
+        h +
+        " " +
+        x +
+        " " +
+        y +
+        " " +
+        op
+    );
+    eel.set_mana_bar(src, w, h, x, y, op);
+  }
+</script>
+
+<script>
+  function changeopacity() {
+    var op = document.getElementById("opac").value;
+    localStorage.setItem("opacity", String(op));
+  }
+  function changevar(variable) {
+    var src = localStorage.getItem("selected");
+    var value = variable.value;
+    localStorage.setItem(src + variable.id, String(value));
+    console.log("Asignado " + variable.id + " a " + variable.value);
+  }
+</script>
+<script src="js/cooldown.js"></script>

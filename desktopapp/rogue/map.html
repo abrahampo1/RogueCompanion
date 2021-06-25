@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<div id="element" 
+style="  
+	position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;"> 
+</div>
+<script src="js/p5.min.js"></script>
+<script src="js/three.r95.min.js"></script>
+<script src="js/vanta.net.min.js"></script>
+<script>
+VANTA.NET({
+  el: "#element",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: true,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  scale: 1.00,
+  scaleMobile: 1.00,
+  color: 0xff002c,
+  backgroundColor: 0x0,
+  points: 3.00,
+  maxDistance: 23.00,
+  spacing: 10.00
+})
+</script>
+<head >
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="/android-icon-192x192.png"
+  />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RogueCompanion</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap"
+    rel="stylesheet"
+  /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css" />
+  <script type="text/javascript" src="/eel.js"></script>
+</head>
+<html  lang="es">
+  <div style="margin-top: 10px; width: 50%; position: absolute; left: 50%; transform: translateX(-50%);">
+      <img src="https://i.imgur.com/qvhSLVh.png" style="border-radius: 15px; height: auto; width: 100%;"/>
+  </div>
+  <body id="body" onload="eel.load();">
+    <div class="texto ">
+    </div>
+    <div id="json"></div>
+    <div class="topnav">
+      <div class="buttons">
+        <button
+          class="pulse btn-center"
+          style="z-index: 20; background-color: rgba(0, 0, 0, 0.288)"
+          onclick="window.location.replace('index.html')"
+        >
+          Home
+        </button>
+      </div>
+    </div>
+    <div class="modal" id="modal">
+      <div class="modal-background" onclick="closemodal()"></div>
+      <div class="modal-content">
+        <span onclick="closemodal()">X</span>
+        <h1 style="color: black;">EZ GRIP</h1>
+        <div class="new">
+          <p>What's new?
+            <hr>
+            <li style="color: brown;">
+              <strong>Cooldowns temporarily disabled due to bugs</strong></li>
+            <li><strong>1.51</strong> Added new Counter Section, that allows you to make all counters you want, to count things, i think</li>
+            <li>Reworked all the interfaces</li>
+            <li>Added AUTO UPDATER, no more 500000 downloads ;)</li>
+            <li>Added ROBLOX ALT MANAGER integration, now 100% fully working (i think)</li>
+            <li>Red is the new Orange</li>
+            <li>Optimized the overlays execution</li>
+          </p>
+          <p>BUG fixes
+            <hr>
+            <li>Fixed a bug that show an script execution error at program startup</li>
+            <li>Fixed a lot of bugs on overlay execution</li>
+          </p>
+          <p>Known Issues
+            <hr>
+            <li>Skill overlay work like shit</li>
+            <li>ManaOverlay sometimes not work well</li>
+            <li>i never touched a woman</li>
+          </p>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  window.onload=function(){
+    eel.load()
+    if(localStorage.getItem("upd1.51")){}else{
+      document.getElementById("modal").classList.add("fade-in");
+      document.getElementById("modal").style.display = "block";
+    }
+
+  }
+</script>
+<script>
+  function opensettings() {
+    document.getElementById("modal").classList.add("fade-in");
+    document.getElementById("modal").style.display = "block";
+  }
+  function closemodal() {
+    document.getElementById("modal").style.display = "none";
+    localStorage.setItem("upd1.51", "1.51");
+  }
+</script>
+<script src="js/main.js"></script>
+<script src="js/cooldown.js"></script>
+
