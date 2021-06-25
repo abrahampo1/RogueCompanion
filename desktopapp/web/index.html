@@ -96,6 +96,7 @@ VANTA.NET({
             <li style="color: brown;">
               <strong>Cooldowns temporarily disabled due to bugs</strong></li>
             <li><strong>1.53</strong> Optimized Backend and fully deactivated the skill keylog to fix bugs and evitate false positives on some Antivirus Software</li>
+            <li><strong>1.53</strong> The Program AUTO CLOSES from the background when you close it (finally)</li>
             <li><strong>1.51</strong> Added new Counter Section, that allows you to make all counters you want, to count things, i think</li>
             <li>Reworked all the interfaces</li>
             <li>Added AUTO UPDATER, no more 500000 downloads ;)</li>
@@ -123,7 +124,7 @@ VANTA.NET({
 <script>
   window.onload=function(){
     eel.load()
-    if(localStorage.getItem("upd1.51")){}else{
+    if(localStorage.getItem("upd1.53")){}else{
       document.getElementById("modal").classList.add("fade-in");
       document.getElementById("modal").style.display = "block";
     }
@@ -137,7 +138,7 @@ VANTA.NET({
   }
   function closemodal() {
     document.getElementById("modal").style.display = "none";
-    localStorage.setItem("upd1.51", "1.51");
+    localStorage.setItem("upd1.53", "1.53");
   }
 </script>
 <script src="js/main.js"></script>
