@@ -9,25 +9,22 @@ style="
 </div>
 <script src="js/p5.min.js"></script>
 <script src="js/three.r95.min.js"></script>
-<script src="js/vanta.net.min.js"></script>
+<script src="js/vanta.waves.min.js"></script>
 <script>
-VANTA.NET({
+VANTA.WAVES({
   el: "#element",
   mouseControls: true,
   touchControls: true,
-  gyroControls: true,
+  gyroControls: false,
   minHeight: 200.00,
   minWidth: 200.00,
   scale: 1.00,
   scaleMobile: 1.00,
-  color: 0xff002c,
-  backgroundColor: 0x0,
-  points: 3.00,
-  maxDistance: 23.00,
-  spacing: 10.00
+  color: 0x2f0000
 })
 </script>
 <head >
+  <link rel="stylesheet" href="css/introjs.min.css">
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
   <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
   <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
@@ -64,24 +61,33 @@ VANTA.NET({
 </head>
 <html  lang="es">
   <body id="body" onload="">
-    <div class="texto ">
-      <h1 class="scale-in-center pagetitle">RogueCompanion</h1>
+    <div class="texto " data-intro='Wellcome to RogueCompanion!' data-step="1">
+      <h1 class="scale-in-center pagetitle" >RogueCompanion</h1>
     </div>
-    <div class="version" id="version" onclick="opensettings()"></div>
+    <div class="version" id="version" onclick="opensettings()" data-intro='You can check the changelogs by clicking here!' data-step="2"></div>
     <div id="json"></div>
     <div class="topnav">
       <div class="buttons">
-        <button class="pulse btn-center" id="button-mine">Ore Timer</button>
-        <button class="pulse btn-center" id="button-mana">Mana Overlay</button>
-        <button  class="pulse btn-center disabled" title="Sorry, this section has a lot of bugs and problems, there will be avalible in some soon update!" disabled id="button-cd">Skill Cooldowns</button>
-        <button class="pulse btn-center" id="button-acc">Alt Manager</button>
-        <button class="pulse btn-center" id="button-counter">Counters</button>
+        <button class="pulse btn-center" id="button-mine" data-intro='Here you have a Mine Ore Timer, who notifies you when the ores spawn on the server!' data-step="3">Ore Timer</button>
+        <button class="pulse btn-center" id="button-mana" data-intro='This are Custom Mana Overlays to make the game fell really good' data-step="4">Mana Overlay</button>
+        <button  class="pulse btn-center disabled" title="Sorry, this section has a lot of bugs and problems, there will be avalible in some soon update!" disabled id="button-cd" data-intro='Sorry, this section has a lot of bugs and problems, there will be avalible in some soon update!' data-step="5">Skill Cooldowns</button>
+        <button class="pulse btn-center" id="button-acc" data-intro='Thanks ic3w0lf for your beatiful program! This are a Roblox Account Manager that let you have a lot of accounts and join Rogue with a click!' data-step="6">Alt Manager</button>
+        <button class="pulse btn-center" id="button-counter" data-intro='Make your custom counters! Like: grips, rots, etc etc' data-step="7">Counters</button>
         <button
           class="pulse btn-center"
           style="z-index: 20; background-color: rgba(0, 0, 0, 0.288)"
           onclick="window.location.replace('map.html')"
+          data-intro='A Simple map of Gaia and Khei' data-step="8"
         >
           Map
+        </button>
+        <button
+          class="pulse btn-center"
+          style="z-index: 20; background-color: rgba(0, 0, 0, 0.288)"
+          onclick="window.location.replace('potions.html')"
+          data-intro='A Nice potions interface  😎' data-step="9"
+        >
+          Potions
         </button>
       </div>
     </div>
@@ -89,46 +95,45 @@ VANTA.NET({
       <div class="modal-background" onclick="closemodal()"></div>
       <div class="modal-content">
         <span onclick="closemodal()">X</span>
-        <h1 style="color: black;">EZ GRIP</h1>
+        <h1 style="color: black;">GIVE ALL SILVER</h1>
         <div class="new">
           <p>What's new?
             <hr>
             <li style="color: brown;">
-              <strong>Cooldowns temporarily disabled due to bugs</strong></li>
-            <li><strong>1.53</strong> Optimized Backend and fully deactivated the skill keylog to fix bugs and evitate false positives on some Antivirus Software</li>
-            <li><strong>1.53</strong> The Program AUTO CLOSES from the background when you close it (finally)</li>
-            <li><strong>1.51</strong> Added new Counter Section, that allows you to make all counters you want, to count things, i think</li>
-            <li>Reworked all the interfaces</li>
-            <li>Added AUTO UPDATER, no more 500000 downloads ;)</li>
-            <li>Added ROBLOX ALT MANAGER integration, now 100% fully working (i think)</li>
-            <li>Red is the new Orange</li>
-            <li>Optimized the overlays execution</li>
+              <strong>Cooldowns still temporarily disabled due to bugs</strong></li>
+            <li>Added import custom mana overlays (if you dont want to use free shitty mana bars)</li>
+            <li>Reworked of the background</li>
+            <li>Added a map (where i am?)</li>
+            <li>Added a new potions interface</li>
+            <li>Optimized the program itself</li>
+            <li>Animated some things</li>
+            <li>Made a tutorial to make the program more pro!</li>
           </p>
           <p>BUG fixes
             <hr>
-            <li>Fixed a bug that show an script execution error at program startup</li>
-            <li>Fixed a lot of bugs on overlay execution</li>
+            <li>All the known bugs are fixed and the false positives too</li>
           </p>
           <p>Known Issues
             <hr>
-            <li>Skill overlay work like shit</li>
-            <li>ManaOverlay sometimes not work well</li>
-            <li>i never touched a woman</li>
+            <li>Sometimes the program crashes, i still working on that</li>
           </p>
         </div>
         
       </div>
     </div>
   </body>
+  
+<script src="js/intro.min.js"></script>
 </html>
 <script>
   window.onload=function(){
     eel.load()
-    if(localStorage.getItem("upd1.53")){}else{
-      document.getElementById("modal").classList.add("fade-in");
-      document.getElementById("modal").style.display = "block";
+    if(localStorage.getItem("firsttime")){}else{
+      introJs().onbeforeexit(function () {
+        localStorage.setItem("firsttime", "no");;
+}).start()
+      console.log("First Start")
     }
-
   }
 </script>
 <script>
@@ -138,7 +143,7 @@ VANTA.NET({
   }
   function closemodal() {
     document.getElementById("modal").style.display = "none";
-    localStorage.setItem("upd1.53", "1.53");
+    localStorage.setItem("upd1.6", "1.6");
   }
 </script>
 <script src="js/main.js"></script>

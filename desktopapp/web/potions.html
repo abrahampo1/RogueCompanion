@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<div
+  id="element"
+  style="position: fixed; width: 100%; height: 100%; left: 0; top: 0"
+></div>
+<script src="js/p5.min.js"></script>
+<script src="js/three.r95.min.js"></script>
+<script src="js/vanta.waves.min.js"></script>
+<script>
+  VANTA.WAVES({
+    el: "#element",
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.0,
+    minWidth: 200.0,
+    scale: 1.0,
+    scaleMobile: 1.0,
+    color: 0x2f0000,
+  });
+</script>
+<head>
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="/android-icon-192x192.png"
+  />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RogueCompanion</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/main.css" />
+  <script type="text/javascript" src="/eel.js"></script>
+</head>
+<style>
+  .cardpoti {
+    cursor: pointer;
+    margin: 10px;
+    width: auto;
+    height: auto;
+    padding: -10px;
+    background-color: antiquewhite;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px -4px #000000;
+    position: relative;
+    text-align: center;
+  }
+  .cardpoti img {
+    width: 110px;
+    max-height: auto;
+    margin: 5px;
+    border-radius: 15px;
+  }
+  .calderon {
+    position: static;
+    z-index: 0;
+  }
+  .calderon img {
+    width: 200px;
+    position: relative;
+    bottom: 50px;
+  }
+  .paso img {
+    border-radius: 20px;
+    width: 50px;
+    max-height: 100px;
+    display: flex;
+    justify-content: center;
+  }
+  .pasos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 4;
+  }
+  .paso {
+    cursor: pointer;
+  }
+  .explain {
+    display: none;
+    text-align: center;
+    z-index: 50;
+  }
+  .paso span {
+    background-color: white;
+    padding: 5px;
+    border-radius: 20px;
+    position: relative;
+    bottom: 20px;
+  }
+  .centered {
+    cursor: auto;
+    z-index: 52;
+    -webkit-animation: centeranim 1s;
+    animation: centeranim 1s;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+  }
+  .ingredient {
+    display: none;
+    position: absolute;
+    left: -200px;
+    bottom: 10%;
+    background-color: antiquewhite;
+    padding: 5px;
+    width: 200px;
+    height: 200px;
+    border-radius: 20px 0px 0px 20px;
+  }
+
+  .fade-in {
+    display: block !important;
+    animation: fade-in 1s;
+  }
+
+  @keyframes centeranim {
+    0% {
+      position: relative;
+      top: 0px;
+      left: 0px;
+      width: 150px;
+      height: 200px;
+      transform: translate(0%, 0%);
+    }
+    1% {
+      position: absolute;
+    }
+    100% {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 400px;
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes decorarimg {
+    0% {
+      position: relative;
+      top: 0%;
+    }
+    100% {
+      top: -20px;
+    }
+  }
+
+  @keyframes showrecipe {
+    0% {
+      opacity: 0;
+      position: relative;
+      top: -30px;
+    }
+    100% {
+      opacity: 1;
+      position: relative;
+      top: 0px;
+    }
+  }
+  @keyframes animingredient {
+    0% {
+      opacity: 0;
+      left: -100px;
+    }
+    100% {
+      opacity: 1;
+      left: -200px;
+    }
+  }
+  @keyframes animingredientout {
+    0% {
+      opacity: 1;
+      left: -200px;
+      display: block;
+    }
+    100% {
+      display: block;
+      opacity: 0;
+      left: -100px;
+    }
+  }
+
+  #background {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 51;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .potions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .decorarimg {
+    animation: decorarimg 1s;
+    position: relative;
+    top: -20px;
+  }
+  .showrecipe {
+    animation: showrecipe 0.3s;
+    display: block;
+  }
+  .animingredient {
+    animation: animingredient 1s;
+    display: block;
+    z-index: 51;
+  }
+  .animingredientout {
+    animation: animingredientout 1s;
+    display: none;
+    z-index: 51;
+  }
+  .hide {
+    display: none;
+  }
+</style>
+<html lang="es">
+  <body id="body" style="line-height: -10px">
+    <h1 class="scale-in-center" style="position: relative; top: 15px">
+      PotionMaker
+    </h1>
+    <div class="potions" id="potions">
+      <div class="cardpoti" onclick="center(this)" id="prime_potion">
+        <p style="color: #000000" id="cardname">Tespian</p>
+        <img
+          id="imageshow"
+          src="https://static.wikia.nocookie.net/rogue-lineage/images/8/81/TespianNew.png/revision/latest/scale-to-width-down/137?cb=20191214123341"
+          alt=""
+        />
+        <div class="explain" id="explain">
+          <h1 id="iname" style="color: #000000">Tespian</h1>
+          <div class="pasos" id="pasos"></div>
+          <div class="calderon" id="calderon">
+            <img src="https://i.imgur.com/mEArViX.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="background" onclick="closecentered()"></div>
+    <div class="topnav">
+      <button
+        class="pulse btn-center"
+        onclick="window.location.replace('index.html')"
+      >
+        Home
+      </button>
+    </div>
+  </body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+  window.onload = function () {
+    eel.load();
+    $.ajax({
+      type: "post",
+      url: "https://rogue.cpsoftware.es/api.php",
+      data: {
+        potions: "",
+      },
+      success: function (response) {
+        response = JSON.parse(response);
+        var node = document.getElementById("prime_potion").cloneNode(true);
+        response["potions"].forEach((element) => {
+          var node = document.getElementById("prime_potion").cloneNode(true);
+          console.log(element["name"]);
+          node.querySelector("#iname").innerHTML = element["name"];
+          node.querySelector("#cardname").innerHTML = element["name"];
+
+          node.querySelector("#imageshow").src = element["img_src"];
+          console.log(node.querySelector("#imageshow").src);
+          var ingred = "";
+          element["ingredients"].forEach((ing) => {
+            ingred +=
+              '<div class="paso" onclick="showingredient(this)"><img src="' +
+              ing["img_src"] +
+              '" alt=""/><span>' +
+              ing["cant"] +
+              '</span><div class="ingredient" id="ingredient"><h1 style="color:black">' +
+              ing["name"] +
+              "</h1><p>" +
+              ing["desc"] +
+              "</p></div></div>";
+          });
+          node.querySelector("#explain").querySelector("#pasos").innerHTML =
+            ingred;
+          document.getElementById("potions").appendChild(node);
+          console.log(node);
+        });
+        document.getElementById("prime_potion").style.display = "none";
+      },
+      error: function () {},
+    });
+  };
+  var centered;
+  function center(element) {
+    document.getElementById("background").classList.add("fade-in");
+    element.querySelector("#imageshow").classList.add("decorarimg");
+    element.querySelector("#cardname").classList.add("hide");
+    element.classList.add("centered");
+    element.addEventListener(
+      "animationend",
+      function () {
+        element.querySelector("#explain").classList.add("showrecipe");
+      },
+      false
+    );
+    centered = element;
+  }
+  function closecentered() {
+    if (centered) {
+      centered.querySelector("#cardname").classList.remove("hide");
+      document.getElementById("background").classList.remove("fade-in");
+      centered.querySelector("#imageshow").classList.remove("decorarimg");
+      centered.classList.remove("centered");
+      centered.querySelector("#explain").classList.remove("showrecipe");
+    }
+  }
+  var lastelement;
+  function showingredient(element) {
+    if (lastelement) {
+      lastelement
+        .querySelector("#ingredient")
+        .classList.remove("animingredient");
+      lastelement
+        .querySelector("#ingredient")
+        .classList.add("animingredientout");
+    }
+    element.querySelector("#ingredient").classList.remove("animingredientout");
+    element.querySelector("#ingredient").classList.add("animingredient");
+    lastelement = element;
+  }
+</script>

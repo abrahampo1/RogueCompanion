@@ -15,7 +15,6 @@ import json
 import socket
 import sys
 import subprocess
-import logging
 #from win32gui import GetWindowText, GetForegroundWindow
 #from datetime import datetime
 #from pynput.mouse import Listener
@@ -24,11 +23,7 @@ import logging
 
 global currentskill
 currentskill = ""
-logging.basicConfig(filename='std.log', filemode='w',
-                    format='%(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-version = 1.53
+version = 1.6
 global windowopen #Set a variable to know when close the program on lose webhook
 url_web = "https://rogue.cpsoftware.es"
 
@@ -150,7 +145,7 @@ url_web = "https://rogue.cpsoftware.es"
 
 
 def buildapi():  # Get an API on CPCLoudService to verify the instance
-    logger.info("Building the API conection...")
+
     url_base = url_web + "/api.php"
     url = url_base
     ip = requests.get('https://api.ipify.org').text
@@ -172,7 +167,6 @@ def buildapi():  # Get an API on CPCLoudService to verify the instance
 
 
 def validarapi(api):
-    logger.info("starting...")
     url_base = url_web + "/api.php"
     url = url_base
     myobj = {
@@ -180,7 +174,6 @@ def validarapi(api):
     }
     x = requests.post(url, data=myobj)
     if x.text == "OK":
-        logger.info("STARTED!")
         return True
     else:
         return False
@@ -204,7 +197,6 @@ try:
         f = open("data.txt")
         data = json.load(f)
         if validarapi(data["api"]) == False:
-            logger.info("I cant start, trying again...")
             data = buildapi()
     except:
         # if the program dont detect savedata file, build one
@@ -248,27 +240,25 @@ def get_mana_bar():
 @eel.expose
 def closemana():
     subprocess.run(
-        'C:\Windows\System32/taskkill /F /IM manaoverlay.exe', shell=True)
+        'C:\Windows\System32/taskkill /F /IM manaoverlay.exe', shell=False)
 
 
 @eel.expose
 def krbx():
     subprocess.run(
-        "C:\Windows\System32/taskkill /F /IM RobloxPlayerBeta.exe", shell=True)
+        "C:\Windows\System32/taskkill /F /IM RobloxPlayerBeta.exe", shell=False)
 
 
 @eel.expose
 def set_mana_bar(src, w="200", h="600", px="10", py="10", op="100"):
     print("mana")
     if os.path.isfile("manaoverlay.exe"):
-        logger.info("manaoverlay exists...")
 
         try:
             subprocess.run(
-                'C:\Windows\System32/taskkill /F /IM manaoverlay.exe', shell=True)
+                'C:\Windows\System32/taskkill /F /IM manaoverlay.exe', shell=False)
         except:
-            logger.info("opening manaoverlay...")
-        path = format(os.path.realpath(os.path.dirname(
+            path = format(os.path.realpath(os.path.dirname(
             sys.argv[0]))) + "\manaoverlay.exe "+w+" "+h+" "+px+" "+py+" "+src+" "+op
         subprocess.run("START "+path, shell=True)
     else:
@@ -279,7 +269,7 @@ def set_mana_bar(src, w="200", h="600", px="10", py="10", op="100"):
 def set_skill_overlay(src, w="200", h="600", px="10", py="10", op="100", r="255", g="255", b="255", config="false", close="false", timeout="0", skill="Lighting Elbow"):
     print("skilloverlay")
     if os.path.isfile("skilloverlay.exe"):
-        logger.info("skilloverlay exists...")
+        print("SkillOverlay exists")
     else:
         print("SkillOverlay Doesnt exists")
     url_base = url_web + "/api.php"
@@ -294,11 +284,11 @@ def set_skill_overlay(src, w="200", h="600", px="10", py="10", op="100", r="255"
     currentskill = ""
     if(close == "true"):
         subprocess.run(
-            'C:\Windows\System32/taskkill /F /IM skilloverlay.exe', shell=True)
+            'C:\Windows\System32/taskkill /F /IM skilloverlay.exe', shell=False)
     path = format(os.path.realpath(os.path.dirname(
         sys.argv[0]))) + "\skilloverlay.exe "+w+" "+h+" "+px+" "+py+" "+src+" "+op+" "+r+" "+g+" "+b+" "+config
     #path = os.path.realpath(os.path.dirname(sys.argv[0])) + "\skilloverlay.exe 200 600 100 100 120 100"
-    subprocess.run('START "" ' + path, shell=True)
+    subprocess.run('START "" ' + path, shell=False)
     print(path)
 
 
@@ -306,7 +296,7 @@ def set_skill_overlay(src, w="200", h="600", px="10", py="10", op="100", r="255"
 def loadalt(alt, job, userjoin=""):
     path = os.path.realpath(os.path.dirname(
         sys.argv[0])) + '/rbxaccmanager/"RBX Alt Manager.exe" '+alt+" "+job+" "+userjoin
-    subprocess.run('START ' + path, shell=True)
+    subprocess.run('START ' + path, shell=False)
     print("Started: "+path)
 
 
